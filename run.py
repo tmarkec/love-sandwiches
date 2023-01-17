@@ -29,6 +29,8 @@ def get_sales_data():
         if validate_data(sales_data):
             print("Data is valid")
             break
+    return sales_data
+
 
 def validate_data(values):
     """ 
@@ -49,5 +51,21 @@ def validate_data(values):
 
     return True
 
-    
-get_sales_data()
+
+def update_sales_worksheet(data):
+    """
+    Update sales worksheet, add new row with the list data provided.
+    """
+    print("Updating sales worksheet...\n")
+    sales_worksheet = SHEET.worksheet("sales")
+    sales_worksheet.append_row(data)
+    print("Sales worksheet updates successfully.\n")
+
+
+data = get_sales_data()
+
+
+sales_data = [int(num) for num in data]
+# loop that goes through all numbers in 'data' and convert them to integers
+
+update_sales_worksheet(sales_data)
