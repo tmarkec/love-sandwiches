@@ -104,6 +104,20 @@ def update_worksheet(data, worksheet):
     print(f"Worksheet {worksheet} has been updated")
 
 
+def get_last_5_entries():
+    """
+    Collect collumns of data from sales worksheet, collecting last 5 entries
+    and returns the data as list of list.
+    """
+    sales = SHEET.worksheet('sales')
+  
+    columns = []
+    for ind in range(1, 7):
+        column = sales.col_values(ind)
+        columns.append(column[-5:])
+    return columns
+
+
 def main():
     """
     Run all program function
@@ -115,7 +129,7 @@ def main():
     # update_sales_worksheet(sales_data)
     new_surplus_date = calculate_surplus(sales_data)
     update_worksheet(new_surplus_date, 'surplus')
-
+    sales_column = get_last_5_entries()
 
 print("Welcome to Love Sandwiches Data Automation \n")
 
