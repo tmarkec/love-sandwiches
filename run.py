@@ -53,15 +53,15 @@ def validate_data(values):
     return True
 
 
-def update_sales_worksheet(data):
-    """
-    Update sales worksheet, add new row with the list data provided.
-    """
-    print("Updating sales worksheet...\n")
-    # grab our spreadsheet and update it with our input on last row
-    sales_worksheet = SHEET.worksheet("sales")
-    sales_worksheet.append_row(data)
-    print("Sales worksheet updates successfully.\n")
+# def update_sales_worksheet(data):
+#     """
+#     Update sales worksheet, add new row with the list data provided.
+#     """
+#     print("Updating sales worksheet...\n")
+#     # grab our spreadsheet and update it with our input on last row
+#     sales_worksheet = SHEET.worksheet("sales")
+#     sales_worksheet.append_row(data)
+#     print("Sales worksheet updates successfully.\n")
 
 
 def calculate_surplus(sales_row):
@@ -81,15 +81,27 @@ def calculate_surplus(sales_row):
     return surplus_data
 
 
-def update_surplus_worksheet(data):
-    """
-    Update surplus worksheet, add new row with the new surplus.
-    """
-    print("Updating surplus worksheet...\n")
-    surplus_worksheet = SHEET.worksheet("surplus")
-    surplus_worksheet.append_row(data)
+# def update_surplus_worksheet(data):
+#     """
+#     Update surplus worksheet, add new row with the new surplus.
+#     """
+#     print("Updating surplus worksheet...\n")
+#     surplus_worksheet = SHEET.worksheet("surplus")
+#     surplus_worksheet.append_row(data)
 
-    print("Surplus worksheet has been updated")
+#     print("Surplus worksheet has been updated")
+
+
+def update_worksheet(data, worksheet):
+    """
+    Recives a list of integers to be inserted into workshee.
+    Update the relevant worksheet with data provided.
+    """
+    print(f"Updating {worksheet} worksheet...\n")
+    worksheet_to_update = SHEET.worksheet(worksheet)
+    worksheet_to_update.append_row(data)
+
+    print(f"Worksheet {worksheet} has been updated")
 
 
 def main():
@@ -99,10 +111,12 @@ def main():
     data = get_sales_data()
     sales_data = [int(num) for num in data]
     # loop that goes through all numbers in 'data' and convert them to integers
-    update_sales_worksheet(sales_data)
+    update_worksheet(sales_data, 'sales')
+    # update_sales_worksheet(sales_data)
     new_surplus_date = calculate_surplus(sales_data)
-    print(new_surplus_date)
-    update_surplus_worksheet(new_surplus_date)
+    update_worksheet(new_surplus_date, 'surplus')
+
+
 print("Welcome to Love Sandwiches Data Automation \n")
 
 
